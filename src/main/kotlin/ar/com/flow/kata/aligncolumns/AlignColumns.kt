@@ -10,25 +10,26 @@ class LeftAlignment: ColumnAlignment {
     }
 }
 
-class AlignColumns(private val alignment: ColumnAlignment= LeftAlignment()) {
-    fun applyTo(lines: List<List<String>>): List<List<String>> {
-        val maxColumnWidths = lines.map{ line -> this.calculateMaxColumnWidthOfLine(line) }
-        val maxColumnWidth = maxColumnWidths.maxOrNull() ?: 0
-        return lines.map { line -> this.alignColumns(line, maxColumnWidth) }
-    }
-
-    private fun alignColumns(line: List<String>, maxColumnWidth: Int): List<String>  {
-        return line.map { cell -> this.alignment.applyTo(cell, maxColumnWidth) }
-    }
-
-    private fun calculateMaxColumnWidthOfLine(line: List<String>): Int {
-        return line.maxOfOrNull { cell -> cell.length } ?: 0
+class AlignColumns(private val alignment: ColumnAlignment) {
+    fun applyTo(lineStrings: List<List<String>>): List<List<String>> {
+        val lines = lineStrings.map{ Line(it) }
+        val maxColumnWidth = lines.maxOfOrNull { it.maxColumnWidth() } ?: 0
+        return lines.map{ it.alignColumns(alignment, maxColumnWidth) }
     }
 
     companion object {
-        fun of(lines: List<List<String>>, alignment: ColumnAlignment= LeftAlignment()): List<List<String>> {
-            val align = AlignColumns(alignment)
-            return align.applyTo(lines)
+        fun of(lines: List<List<String>>, alignment: ColumnAlignment = LeftAlignment()): List<List<String>> {
+            return AlignColumns(alignment).applyTo(lines)
         }
+    }
+}
+
+class Line(private val cells: List<String>) {
+    fun maxColumnWidth(): Int {
+        return cells.maxOfOrNull { cell -> cell.length } ?: 0
+    }
+
+    fun alignColumns(alignment: ColumnAlignment, columnWidth: Int): List<String>  {
+        return this.cells.map { cell -> alignment.applyTo(cell, columnWidth) }
     }
 }
