@@ -1,7 +1,7 @@
 package ar.com.flow.kata.aligncolumns
 
 class AlignColumns(private val alignment: ColumnAlignment) {
-    fun applyTo(lines: List<Line>): List<List<String>> {
+    fun applyTo(lines: List<Line>): List<Line> {
         return lines.map{ line -> line.alignColumns(alignment, columnWidth = maxColumnWidth(lines)) }
     }
 
@@ -12,7 +12,9 @@ class AlignColumns(private val alignment: ColumnAlignment) {
     companion object {
         fun of(lineStrings: List<List<String>>, alignment: ColumnAlignment): List<List<String>> {
             val lines = lineStrings.map{ cells -> Line(cells) }
-            return AlignColumns(alignment).applyTo(lines)
+
+            // TODO: Extract output format behavior from Line
+            return AlignColumns(alignment).applyTo(lines).map { line -> line.asList() }
         }
     }
 }
