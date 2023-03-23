@@ -1,10 +1,10 @@
 package ar.com.flow.kata.aligncolumns
 
-interface ColumnAlignment {
+interface Alignment {
     fun applyTo(cellValue: String, columnWidth: Int): String
 }
 
-class LeftAlignment: ColumnAlignment {
+class LeftAlignment: Alignment {
     override fun applyTo(cellValue: String, columnWidth: Int): String {
         return cellValue.plus(" ".repeat(columnWidth - cellValue.length))
     }
