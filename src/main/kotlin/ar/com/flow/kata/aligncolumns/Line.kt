@@ -9,4 +9,10 @@ class Line(private val cells: List<Cell>) {
     fun asList(): List<String> {
         return this.cells.map { cell -> cell.value }
     }
+
+    companion object {
+        fun from(lineAsListOfString: List<String>, columns: List<Column>): Line {
+            return Line(Cells.from(lineAsListOfString, columns))
+        }
+    }
 }

@@ -8,10 +8,7 @@ class AlignColumns(private val alignment: Alignment) {
     companion object {
         fun of(linesAsListOfListOfStrings: List<List<String>>, alignment: Alignment): List<List<String>> {
             val columns = Columns.of(linesAsListOfListOfStrings)
-
-            val lines = linesAsListOfListOfStrings
-                .map { lineValues -> Cells.from(lineValues, columns) }
-                .map { cells -> Line(cells) }
+            val lines = linesAsListOfListOfStrings.map { lineAsListOfString -> Line.from(lineAsListOfString, columns) }
 
             // TODO: Extract output format behavior from Line
             return AlignColumns(alignment).applyTo(lines).map { line -> line.asList() }
