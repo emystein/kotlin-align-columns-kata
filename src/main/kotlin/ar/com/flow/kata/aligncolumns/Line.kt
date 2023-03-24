@@ -5,7 +5,7 @@ class Line(private val cells: List<String>) {
         return this.cells.maxOfOrNull { cell -> cell.length } ?: 0
     }
 
-    fun alignColumns(alignment: Alignment, columnWidth: Int): Line  {
+    fun alignColumns(alignment: Alignment, columnWidth: Int): Line {
         val alignedCells = this.cells.map { cell -> alignment.applyTo(cell, columnWidth) }
         return Line(alignedCells)
     }

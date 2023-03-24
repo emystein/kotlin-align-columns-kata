@@ -37,4 +37,12 @@ class AlignColumnsTest {
         assertThat(aligned).isEqualTo(listOf(listOf("Align    ", "me       "),
                                              listOf("The      ", "Alignment")))
     }
+    @Test
+    fun givenManyLinesDifferentNumberOfColumnsWhenAlignColumnsThenTheColumnsShouldBeAlignedToTheWidestColumn() {
+        val aligned = AlignColumns.of(listOf(listOf("Align"),
+                                      listOf("The", "Alignment")), alignment = LeftAlignment())
+
+        assertThat(aligned).isEqualTo(listOf(listOf("Align    ", "         "),
+                                             listOf("The      ", "Alignment")))
+    }
 }

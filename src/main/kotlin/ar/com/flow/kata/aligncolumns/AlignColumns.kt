@@ -11,10 +11,17 @@ class AlignColumns(private val alignment: Alignment) {
 
     companion object {
         fun of(lineStrings: List<List<String>>, alignment: Alignment): List<List<String>> {
-            val lines = lineStrings.map{ cells -> Line(cells) }
+            val totalCellCount = lineStrings.maxOfOrNull{ cells -> cells.size } ?: 0
+            val lines = lineStrings.map{ cells -> completeCellsWithMissing(cells, totalCellCount) }
+                                   .map{ cells -> Line(cells) }
 
             // TODO: Extract output format behavior from Line
             return AlignColumns(alignment).applyTo(lines).map { line -> line.asList() }
+        }
+
+        private fun completeCellsWithMissing(cells: List<String>, totalCellCount: Int): List<String> {
+            val missingCellCount = totalCellCount - cells.size
+            return cells.plus(Array(missingCellCount, init = { _: Int -> "" }))
         }
     }
 }
