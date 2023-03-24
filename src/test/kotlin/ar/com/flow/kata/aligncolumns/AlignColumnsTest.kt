@@ -21,28 +21,28 @@ class AlignColumnsTest {
     fun givenOneLineManyColumnsWithFirstColumnWidestWhenAlignColumnsThenTheColumnShouldBeAlignedToTheFirstColumn() {
         val aligned = AlignColumns.of(listOf(listOf("Align", "me")), alignment = LeftAlignment())
 
-        assertThat(aligned).isEqualTo(listOf(listOf("Align", "me   ")))
+        assertThat(aligned).isEqualTo(listOf(listOf("Align", "me")))
     }
     @Test
     fun givenOneLineManyColumnsWithSecondColumnWidestWhenAlignColumnsThenTheColumnShouldBeAlignedToTheSecondColumn() {
         val aligned = AlignColumns.of(listOf(listOf("The", "Alignment")), alignment = LeftAlignment())
 
-        assertThat(aligned).isEqualTo(listOf(listOf("The      ", "Alignment")))
+        assertThat(aligned).isEqualTo(listOf(listOf("The", "Alignment")))
     }
     @Test
     fun givenManyLinesManyColumnsWhenAlignColumnsThenTheColumnsShouldBeAlignedToTheWidestColumn() {
         val aligned = AlignColumns.of(listOf(listOf("Align", "me"),
                                              listOf("The", "Alignment")), alignment = LeftAlignment())
 
-        assertThat(aligned).isEqualTo(listOf(listOf("Align    ", "me       "),
-                                             listOf("The      ", "Alignment")))
+        assertThat(aligned).isEqualTo(listOf(listOf("Align", "me       "),
+                                             listOf("The  ", "Alignment")))
     }
     @Test
     fun givenManyLinesDifferentNumberOfColumnsWhenAlignColumnsThenTheColumnsShouldBeAlignedToTheWidestColumn() {
         val aligned = AlignColumns.of(listOf(listOf("Align"),
                                       listOf("The", "Alignment")), alignment = LeftAlignment())
 
-        assertThat(aligned).isEqualTo(listOf(listOf("Align    ", "         "),
-                                             listOf("The      ", "Alignment")))
+        assertThat(aligned).isEqualTo(listOf(listOf("Align", "         "),
+                                             listOf("The  ", "Alignment")))
     }
 }
