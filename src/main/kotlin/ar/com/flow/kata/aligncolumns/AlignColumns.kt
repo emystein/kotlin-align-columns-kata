@@ -6,20 +6,21 @@ class AlignColumns(private val alignment: Alignment) {
     }
 
     companion object {
-        fun of(lineStrings: List<List<String>>, alignment: Alignment): List<List<String>> {
-            val columns = Columns.of(lineStrings)
+        fun of(linesAsListOfListOfStrings: List<List<String>>, alignment: Alignment): List<List<String>> {
+            val columns = Columns.of(linesAsListOfListOfStrings)
 
-            val lines = lineStrings
-                .map { line -> completeCellsUpToSize(line, columns.size) }
-                .map { line -> Line.fromValues(line, columns) }
+            val lines = linesAsListOfListOfStrings
+                .map { lineValues -> completeLineValuesUpTotalColumns(lineValues, columns) }
+                .map { lineValues -> lineValues.withIndex().map { (index, cellValue) -> Cell(cellValue, columns[index].width) } }
+                .map { cells -> Line(cells) }
 
             // TODO: Extract output format behavior from Line
             return AlignColumns(alignment).applyTo(lines).map { line -> line.asList() }
         }
 
-        private fun completeCellsUpToSize(cells: List<String>, totalCellCount: Int): List<String> {
-            val missingCellCount = totalCellCount - cells.size
-            return cells.plus(Array(missingCellCount, init = { _: Int -> "" }))
+        private fun completeLineValuesUpTotalColumns(lineValues: List<String>, columns: List<Column>): List<String> {
+            val missingCellCount = columns.size - lineValues.size
+            return lineValues.plus(Array(missingCellCount, init = { _: Int -> "" }))
         }
     }
 }
