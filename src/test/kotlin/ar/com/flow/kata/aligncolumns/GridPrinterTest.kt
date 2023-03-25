@@ -11,7 +11,7 @@ class GridPrinterTest {
 
 		assertThat(printed).isEqualTo(
 			"**\n" +
-					"**\n"
+			"**\n"
 		)
 	}
 
@@ -21,8 +21,8 @@ class GridPrinterTest {
 
 		assertThat(printed).isEqualTo(
 			"*----*\n" +
-					"|Show|\n" +
-					"*----*\n"
+			"|Show|\n" +
+			"*----*\n"
 		)
 	}
 
@@ -32,8 +32,8 @@ class GridPrinterTest {
 
 		assertThat(printed).isEqualTo(
 			"*----*--*\n" +
-					"|Show|me|\n" +
-					"*----*--*\n"
+			"|Show|me|\n" +
+			"*----*--*\n"
 		)
 	}
 
@@ -48,9 +48,9 @@ class GridPrinterTest {
 
 		assertThat(printed).isEqualTo(
 			"*----*-----*\n" +
-					"|Show|me   |\n" +
-					"|The |money|\n" +
-					"*----*-----*\n"
+			"|Show|me   |\n" +
+			"|The |money|\n" +
+			"*----*-----*\n"
 		)
 	}
 }
