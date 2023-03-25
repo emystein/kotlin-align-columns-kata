@@ -1,12 +1,9 @@
 package ar.com.flow.kata.aligncolumns
 
 object Lines {
-	fun from(listOfListOfStrings: List<List<String>>): List<Line> {
-		val columns = Columns.of(listOfListOfStrings)
-
-		return listOfListOfStrings.map { lineAsListOfStrings ->
-			Line.from(lineAsListOfStrings, columns)
-		}
+	fun from(input: List<List<String>>): List<Line> {
+		val columns = Columns.of(input)
+		return input.map { lineInput -> Line.from(lineInput, columns) }
 	}
 }
 
@@ -21,8 +18,8 @@ data class Line(private val cells: List<Cell>) {
 	}
 
 	companion object {
-		fun from(lineAsListOfString: List<String>, columns: List<Column>): Line {
-			return Line(Cells.from(lineAsListOfString, columns))
+		fun from(input: List<String>, columns: List<Column>): Line {
+			return Line(Cells.from(input, columns))
 		}
 	}
 }
