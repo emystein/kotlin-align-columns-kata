@@ -19,7 +19,11 @@ data class Line(private val cells: List<Cell>) {
 
 	companion object {
 		fun from(input: List<String>, columns: List<Column>): Line {
-			return Line(Cells.from(input, columns))
+			val cells = columns.map { column ->
+				val cellValue = input.getOrNull(column.number - 1) ?: ""
+				Cell(cellValue, column.width)
+			}
+			return Line(cells)
 		}
 	}
 }
