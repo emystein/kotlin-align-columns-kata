@@ -3,13 +3,15 @@ package ar.com.flow.kata.aligncolumns
 class GridPrinter {
     fun print(lines: List<List<String>>): String {
         val borderRow =
-            Columns.of(lines).map { column -> "-".repeat(column.width) }
-                             .joinToString( separator = "*", prefix = "*", postfix = "*")
-        val wrappedLines = lines.joinToString(separator = "") { line -> wrapLine(line) }
-        return borderRow + "\n" + wrappedLines + borderRow + "\n"
+            Columns.of(lines)
+                .joinToString(separator = "*", prefix = "*", postfix = "*") { column -> "-".repeat(column.width) }
+
+        return borderRow + "\n" +
+                lines.joinToString(separator = "") { line -> wrapLine(line) + "\n" } +
+                borderRow + "\n"
     }
 
     private fun wrapLine(words: List<String>): String {
-        return words.joinToString(separator = "|", prefix = "|", postfix = "|\n")
+        return words.joinToString(separator = "|", prefix = "|", postfix = "|")
     }
 }
