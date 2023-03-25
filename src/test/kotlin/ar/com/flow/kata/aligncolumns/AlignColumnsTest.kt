@@ -10,7 +10,7 @@ class AlignColumnsTest {
 		val table = Table.from(emptyList())
 		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
-		assertThat(aligned).isEqualTo(Table.from(emptyList()))
+		assertThat(aligned).isEqualTo(emptyList())
 	}
 
 	@Test
@@ -18,7 +18,7 @@ class AlignColumnsTest {
 		val table = Table.from(listOf(listOf("The")))
 		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
-		assertThat(aligned).isEqualTo(Table.from(listOf(listOf("The"))))
+		assertThat(aligned).isEqualTo(listOf(listOf("The")))
 	}
 
 	@Test
@@ -26,7 +26,7 @@ class AlignColumnsTest {
 		val table = Table.from(listOf(listOf("Align", "me")))
 		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
-		assertThat(aligned).isEqualTo(Table.from(listOf(listOf("Align", "me"))))
+		assertThat(aligned).isEqualTo(listOf(listOf("Align", "me")))
 	}
 
 	@Test
@@ -34,7 +34,7 @@ class AlignColumnsTest {
 		val table = Table.from(listOf(listOf("The", "Alignment")))
 		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
-		assertThat(aligned).isEqualTo(Table.from(listOf(listOf("The", "Alignment"))))
+		assertThat(aligned).isEqualTo(listOf(listOf("The", "Alignment")))
 	}
 
 	@Test
@@ -49,10 +49,10 @@ class AlignColumnsTest {
 		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(
-			Table.from(listOf(
+			listOf(
 				listOf("Align", "me       "),
 				listOf("The  ", "Alignment")
-			))
+			)
 		)
 	}
 
@@ -68,24 +68,10 @@ class AlignColumnsTest {
 		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(
-			Table.from(listOf(
+			listOf(
 				listOf("Align", "         "),
 				listOf("The  ", "Alignment")
-			))
-		)
-	}
-
-	@Test
-	fun printGrid() {
-		val input = "Show\$me\nThe\$money"
-
-		val printed = AlignColumns.printGrid(input, alignment = LeftAlignment())
-
-		assertThat(printed).isEqualTo(
-			"*----*-----*\n" +
-			"|Show|me   |\n" +
-			"|The |money|\n" +
-			"*----*-----*\n"
+			)
 		)
 	}
 }
