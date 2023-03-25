@@ -6,8 +6,7 @@ class AlignColumns(private val alignment: Alignment) {
 	}
 
 	companion object {
-		fun of(input: List<List<String>>, alignment: Alignment): List<List<String>> {
-			val lines = Lines.from(input)
+		fun of(lines: List<Line>, alignment: Alignment): List<List<String>> {
 			return AlignColumns(alignment).applyTo(lines).map { line -> line.asList() }
 		}
 	}
