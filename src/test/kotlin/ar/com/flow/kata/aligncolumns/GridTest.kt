@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test
 class GridTest {
 	@Test
 	fun givenEmptyLinesWhenPrintGridThenGridShouldBeEmpty() {
-		val printed = Grid().print(listOf())
+		val lines = Lines.from(emptyList())
+		val printed = Grid().print(lines)
 
 		assertThat(printed).isEqualTo(
 			"**\n" +
@@ -17,7 +18,8 @@ class GridTest {
 
 	@Test
 	fun givenOneLineOneWordWhenPrintGridThenGridShouldWrapWord() {
-		val printed = Grid().print(listOf(listOf("Show")))
+		val lines = Lines.from(listOf(listOf("Show")))
+		val printed = Grid().print(lines)
 
 		assertThat(printed).isEqualTo(
 			"*----*\n" +
@@ -28,7 +30,8 @@ class GridTest {
 
 	@Test
 	fun givenOneLineOneTwoWordsWhenPrintGridThenGridShouldWrapWords() {
-		val printed = Grid().print(listOf(listOf("Show", "me")))
+		val lines = Lines.from(listOf(listOf("Show", "me")))
+		val printed = Grid().print(lines)
 
 		assertThat(printed).isEqualTo(
 			"*----*--*\n" +
@@ -39,12 +42,11 @@ class GridTest {
 
 	@Test
 	fun givenTwoLinesWhenPrintGridThenGridShouldWrapLines() {
-		val printed = Grid().print(
-			listOf(
-				listOf("Show", "me   "),
-				listOf("The ", "money")
-			)
-		)
+		val lines = Lines.from(listOf(
+			listOf("Show", "me   "),
+			listOf("The ", "money")
+		))
+		val printed = Grid().print(lines)
 
 		assertThat(printed).isEqualTo(
 			"*----*-----*\n" +

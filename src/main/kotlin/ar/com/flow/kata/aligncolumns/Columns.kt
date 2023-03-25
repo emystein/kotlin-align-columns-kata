@@ -1,6 +1,10 @@
 package ar.com.flow.kata.aligncolumns
 
 object Columns {
+	fun ofLines(lines: List<Line>): List<Column> {
+		return this.of(lines.map { line -> line.asList() })
+	}
+
 	fun of(lines: List<List<String>>): List<Column> {
 		val columnCount = lines.maxOfOrNull { line -> line.size } ?: 0
 		val columnRange = (1..columnCount)
