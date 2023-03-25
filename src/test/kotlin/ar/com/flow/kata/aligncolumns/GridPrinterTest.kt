@@ -9,7 +9,7 @@ class GridPrinterTest {
     fun givenEmptyLinesWhenPrintGridThenGridShouldBeEmpty() {
         val printed = GridPrinter().print(listOf())
 
-        assertThat(printed).isEqualTo("**\n**")
+        assertThat(printed).isEqualTo("**\n**\n")
     }
     @Test
     fun givenOneLineOneWordWhenPrintGridThenGridShouldWrapWord() {
