@@ -8,7 +8,8 @@ class GridTest {
 	@Test
 	fun givenEmptyLinesWhenPrintGridThenGridShouldBeEmpty() {
 		val lines = Lines.from(emptyList())
-		val printed = Grid().print(lines)
+		val columns = Columns.ofLines(lines)
+		val printed = Grid().print(lines, columns)
 
 		assertThat(printed).isEqualTo(
 			"**\n" +
@@ -19,7 +20,8 @@ class GridTest {
 	@Test
 	fun givenOneLineOneWordWhenPrintGridThenGridShouldWrapWord() {
 		val lines = Lines.from(listOf(listOf("Show")))
-		val printed = Grid().print(lines)
+		val columns = Columns.ofLines(lines)
+		val printed = Grid().print(lines, columns)
 
 		assertThat(printed).isEqualTo(
 			"*----*\n" +
@@ -31,7 +33,8 @@ class GridTest {
 	@Test
 	fun givenOneLineOneTwoWordsWhenPrintGridThenGridShouldWrapWords() {
 		val lines = Lines.from(listOf(listOf("Show", "me")))
-		val printed = Grid().print(lines)
+		val columns = Columns.ofLines(lines)
+		val printed = Grid().print(lines, columns)
 
 		assertThat(printed).isEqualTo(
 			"*----*--*\n" +
@@ -46,7 +49,8 @@ class GridTest {
 			listOf("Show", "me   "),
 			listOf("The ", "money")
 		))
-		val printed = Grid().print(lines)
+		val columns = Columns.ofLines(lines)
+		val printed = Grid().print(lines, columns)
 
 		assertThat(printed).isEqualTo(
 			"*----*-----*\n" +
