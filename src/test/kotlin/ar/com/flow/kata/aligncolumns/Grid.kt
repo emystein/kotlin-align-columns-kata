@@ -1,6 +1,6 @@
 package ar.com.flow.kata.aligncolumns
 
-class GridPrinter {
+class Grid {
 	fun print(lines: List<List<String>>): String {
 		val borderRow =
 			Columns.of(lines)
