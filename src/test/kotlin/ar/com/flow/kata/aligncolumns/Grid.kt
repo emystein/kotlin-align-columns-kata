@@ -1,12 +1,12 @@
 package ar.com.flow.kata.aligncolumns
 
 class Grid {
-	fun print(lines: List<Line>, columns: List<Column>): String {
+	fun print(table: Table): String {
 		val borderRow =
-			columns.joinToString(separator = "*", prefix = "*", postfix = "*") { column -> "-".repeat(column.width) }
+			table.columns.joinToString(separator = "*", prefix = "*", postfix = "*") { column -> "-".repeat(column.width) }
 
 		return borderRow + "\n" +
-				lines.joinToString(separator = "") { line -> wrapLine(line) + "\n" } +
+				table.lines.joinToString(separator = "") { line -> wrapLine(line) + "\n" } +
 				borderRow + "\n"
 	}
 

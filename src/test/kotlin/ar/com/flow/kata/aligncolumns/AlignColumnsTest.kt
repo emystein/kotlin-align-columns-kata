@@ -7,46 +7,46 @@ import org.junit.jupiter.api.Test
 class AlignColumnsTest {
 	@Test
 	fun givenEmptyLinesWhenAlignColumnsThenTheResultShouldBeEmptyLines() {
-		val lines = Lines.from(emptyList())
-		val aligned = AlignColumns.of(lines, alignment = LeftAlignment())
+		val table = Table.from(emptyList())
+		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(emptyList())
 	}
 
 	@Test
 	fun givenOneLineOneColumnWhenAlignColumnsThenTheColumnShouldBeAlignedTheSameAsTheOriginal() {
-		val lines = Lines.from(listOf(listOf("The")))
-		val aligned = AlignColumns.of(lines, alignment = LeftAlignment())
+		val table = Table.from(listOf(listOf("The")))
+		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(listOf(listOf("The")))
 	}
 
 	@Test
 	fun givenOneLineManyColumnsWithFirstColumnWidestWhenAlignColumnsThenTheColumnShouldBeAlignedToTheFirstColumn() {
-		val lines = Lines.from(listOf(listOf("Align", "me")))
-		val aligned = AlignColumns.of(lines, alignment = LeftAlignment())
+		val table = Table.from(listOf(listOf("Align", "me")))
+		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(listOf(listOf("Align", "me")))
 	}
 
 	@Test
 	fun givenOneLineManyColumnsWithSecondColumnWidestWhenAlignColumnsThenTheColumnShouldBeAlignedToTheSecondColumn() {
-		val lines = Lines.from(listOf(listOf("The", "Alignment")))
-		val aligned = AlignColumns.of(lines, alignment = LeftAlignment())
+		val table = Table.from(listOf(listOf("The", "Alignment")))
+		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(listOf(listOf("The", "Alignment")))
 	}
 
 	@Test
 	fun givenManyLinesManyColumnsWhenAlignColumnsThenTheColumnsShouldBeAlignedToTheWidestColumn() {
-		val lines = Lines.from(
+		val table = Table.from(
 			listOf(
 				listOf("Align", "me"),
 				listOf("The", "Alignment")
 			)
 		)
 
-		val aligned = AlignColumns.of(lines, alignment = LeftAlignment())
+		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(
 			listOf(
@@ -58,14 +58,14 @@ class AlignColumnsTest {
 
 	@Test
 	fun givenManyLinesDifferentNumberOfColumnsWhenAlignColumnsThenTheColumnsShouldBeAlignedToTheWidestColumn() {
-		val lines = Lines.from(
+		val table = Table.from(
 			listOf(
 				listOf("Align"),
 				listOf("The", "Alignment")
 			)
 		)
 
-		val aligned = AlignColumns.of(lines, alignment = LeftAlignment())
+		val aligned = AlignColumns.of(table, alignment = LeftAlignment())
 
 		assertThat(aligned).isEqualTo(
 			listOf(
