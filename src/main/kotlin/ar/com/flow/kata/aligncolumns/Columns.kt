@@ -12,7 +12,7 @@ object Columns {
 	}
 }
 
-class Column(val number: Int, values: List<String>) {
+data class Column(val number: Int, val values: List<String>) {
 	val width: Int = values.maxOf { value -> value.length }
 
 	companion object {
