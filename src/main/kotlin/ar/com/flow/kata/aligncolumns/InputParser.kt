@@ -1,7 +1,7 @@
 package ar.com.flow.kata.aligncolumns
 
 class InputParser {
-	fun readLines(input: String): List<Line> {
+	fun readLinesFrom(input: String): List<Line> {
 		return Lines.from(split(input))
 	}
 
