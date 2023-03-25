@@ -6,27 +6,27 @@ import org.junit.jupiter.api.Test
 
 class InputParserTest {
 	@Test
-	fun parseEmpty() {
+	fun readEmpty() {
 		val readLines = InputParser().readLines("")
 		assertThat(readLines).isEqualTo(emptyList())
 	}
 
 	@Test
-	fun parseOneLineWithOneColumn() {
+	fun readOneLineWithOneColumn() {
 		val readLines = InputParser().readLines("Show")
 		val expectedLines = Lines.from(listOf(listOf("Show")))
 		assertThat(readLines).isEqualTo(expectedLines)
 	}
 
 	@Test
-	fun parseOneLineWithTwoColumns() {
+	fun readOneLineWithTwoColumns() {
 		val readLines = InputParser().readLines("Show\$me")
 		val expectedLines = Lines.from(listOf(listOf("Show", "me")))
 		assertThat(readLines).isEqualTo(expectedLines)
 	}
 
 	@Test
-	fun parseTwoLinesWithTwoColumns() {
+	fun readTwoLinesWithTwoColumns() {
 		val readLines = InputParser().readLines("Show\$me\nthe\$money")
 		val expectedLines = Lines.from(
 			listOf(
