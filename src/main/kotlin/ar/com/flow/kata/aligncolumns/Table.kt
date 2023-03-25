@@ -11,5 +11,10 @@ data class Table(val lines: List<Line>, val columns: List<Column>) {
 			val columns = Columns.ofLines(lines)
 			return Table(lines, columns)
 		}
+
+		fun fromLines(lines: List<Line>): Table {
+			val columns = Columns.ofLines(lines)
+			return Table(lines, columns)
+		}
 	}
 }
