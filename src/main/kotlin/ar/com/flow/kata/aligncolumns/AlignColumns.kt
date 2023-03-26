@@ -2,7 +2,7 @@ package ar.com.flow.kata.aligncolumns
 
 class AlignColumns(private val alignment: Alignment) {
 	fun applyTo(table: Table): Table {
-		return Table.fromLines(table.lines.map { line -> line.alignColumns(alignment) })
+		return table.alignColumns(alignment)
 	}
 
 	companion object {

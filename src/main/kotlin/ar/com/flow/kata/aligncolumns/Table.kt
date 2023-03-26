@@ -5,6 +5,11 @@ data class Table(val lines: List<Line>, val columns: List<Column>) {
 		return this.lines.isEmpty()
 	}
 
+	fun alignColumns(alignment: Alignment): Table {
+		val alignedLines = this.lines.map { line -> line.alignColumns(alignment) }
+		return Table(alignedLines, columns)
+	}
+
 	companion object {
 		fun from(input: List<List<String>>): Table {
 			val lines = Lines.from(input)
