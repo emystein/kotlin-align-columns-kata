@@ -4,11 +4,11 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import org.junit.jupiter.api.Test
 
-class GridTest {
+class AsciiGridTest {
 	@Test
 	fun givenEmptyLinesWhenPrintGridThenGridShouldBeEmpty() {
 		val table = Table.from(emptyList())
-		val printed = Grid().print(table)
+		val printed = AsciiGrid().print(table)
 
 		assertThat(printed).isEqualTo(
 			"**\n" +
@@ -19,7 +19,7 @@ class GridTest {
 	@Test
 	fun givenOneLineOneWordWhenPrintGridThenGridShouldWrapWord() {
 		val table = Table.from(listOf(listOf("Show")))
-		val printed = Grid().print(table)
+		val printed = AsciiGrid().print(table)
 
 		assertThat(printed).isEqualTo(
 			"*----*\n" +
@@ -31,7 +31,7 @@ class GridTest {
 	@Test
 	fun givenOneLineOneTwoWordsWhenPrintGridThenGridShouldWrapWords() {
 		val table = Table.from(listOf(listOf("Show", "me")))
-		val printed = Grid().print(table)
+		val printed = AsciiGrid().print(table)
 
 		assertThat(printed).isEqualTo(
 			"*----*--*\n" +
@@ -46,7 +46,7 @@ class GridTest {
 			listOf("Show", "me   "),
 			listOf("The ", "money")
 		))
-		val printed = Grid().print(table)
+		val printed = AsciiGrid().print(table)
 
 		assertThat(printed).isEqualTo(
 			"*----*-----*\n" +

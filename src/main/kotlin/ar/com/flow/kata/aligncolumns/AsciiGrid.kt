@@ -1,6 +1,6 @@
 package ar.com.flow.kata.aligncolumns
 
-class Grid {
+class AsciiGrid {
 	fun print(table: Table): String {
 		val borderRow =
 			table.columns.joinToString(separator = "*", prefix = "*", postfix = "*") { column -> "-".repeat(column.width) }

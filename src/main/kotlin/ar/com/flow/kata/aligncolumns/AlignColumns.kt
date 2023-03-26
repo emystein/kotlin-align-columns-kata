@@ -12,7 +12,7 @@ class AlignColumns(private val alignment: Alignment) {
 
 		fun printGrid(input: String, alignment: Alignment): String {
 			val table = InputParser().readTableFrom(input)
-			return Grid().print(of(table, alignment))
+			return AsciiGrid().print(of(table, alignment))
 		}
 	}
 }
