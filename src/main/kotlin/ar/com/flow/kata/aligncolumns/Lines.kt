@@ -7,27 +7,24 @@ object Lines {
 	}
 }
 
-data class Line(private val cells: List<Cell>, private val columns: List<Column>) {
+data class Line(private val values: List<String>, private val columns: List<Column>) {
 	fun alignColumns(alignment: Alignment): Line {
-		val alignedCells = this.columns.map { column -> this.cellAt(column.number).alignTo(alignment, column.width)}
+		val alignedCells = this.columns.map { column -> alignment.applyTo(this.valueAt(column.number), column.width) }
 		return Line(alignedCells, columns)
 	}
 
-	private fun cellAt(columnNumber: Int): Cell {
-		return this.cells[columnNumber - 1]
+	private fun valueAt(columnNumber: Int): String {
+		return this.values.getOrNull(columnNumber - 1) ?: ""
 	}
 
 	fun asList(): List<String> {
-		return this.cells.map { cell -> cell.value }
+		return this.values
 	}
 
 	companion object {
 		fun from(input: List<String>, columns: List<Column>): Line {
-			val cells = columns.map { column ->
-				val cellValue = input.getOrNull(column.number - 1) ?: ""
-				Cell(cellValue, column.width)
-			}
-			return Line(cells, columns)
+			val values = columns.map { column -> input.getOrNull(column.number - 1) ?: "" }
+			return Line(values, columns)
 		}
 	}
 }
