@@ -8,7 +8,7 @@ class AsciiGridTest {
 	@Test
 	fun givenEmptyLinesWhenPrintGridThenGridShouldBeEmpty() {
 		val table = Table.from(emptyList())
-		val printed = AsciiGrid().print(table)
+		val printed = AsciiGrid(table).print()
 
 		assertThat(printed).isEqualTo(
 			"**\n" +
@@ -19,7 +19,7 @@ class AsciiGridTest {
 	@Test
 	fun givenOneLineOneWordWhenPrintGridThenGridShouldWrapWord() {
 		val table = Table.from(listOf(listOf("Show")))
-		val printed = AsciiGrid().print(table)
+		val printed = AsciiGrid(table).print()
 
 		assertThat(printed).isEqualTo(
 			"*----*\n" +
@@ -31,7 +31,7 @@ class AsciiGridTest {
 	@Test
 	fun givenOneLineOneTwoWordsWhenPrintGridThenGridShouldWrapWords() {
 		val table = Table.from(listOf(listOf("Show", "me")))
-		val printed = AsciiGrid().print(table)
+		val printed = AsciiGrid(table).print()
 
 		assertThat(printed).isEqualTo(
 			"*----*--*\n" +
@@ -46,7 +46,7 @@ class AsciiGridTest {
 			listOf("Show", "me   "),
 			listOf("The ", "money")
 		))
-		val printed = AsciiGrid().print(table)
+		val printed = AsciiGrid(table).print()
 
 		assertThat(printed).isEqualTo(
 			"*----*-----*\n" +

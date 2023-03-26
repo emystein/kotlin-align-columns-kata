@@ -1,17 +1,21 @@
 package ar.com.flow.kata.aligncolumns
 
-class AsciiGrid {
-	fun print(table: Table): String {
-		val borderRow =
-			table.columns.joinToString(separator = "*", prefix = "*", postfix = "*") { column -> "-".repeat(column.width) }
+class AsciiGrid(private val wrappedTable: Table) {
+	private val borderRow =
+		this.wrappedTable.columns
+			.joinToString(separator = "*", prefix = "*", postfix = "*") { column -> "-".repeat(column.width) }
 
-		return borderRow + "\n" +
-				table.lines.joinToString(separator = "") { line -> wrapLine(line) + "\n" } +
-				borderRow + "\n"
+	private val wrappedLines =
+		this.wrappedTable.lines
+			.joinToString(separator = "") { line -> wrapLine(line) + "\n" }
+
+	fun print(): String {
+		return this.borderRow + "\n" +
+				this.wrappedLines +
+				this.borderRow + "\n"
 	}
 
 	private fun wrapLine(line: Line): String {
-		val words = line.asList()
-		return words.joinToString(separator = "|", prefix = "|", postfix = "|")
+		return line.asList().joinToString(separator = "|", prefix = "|", postfix = "|")
 	}
 }

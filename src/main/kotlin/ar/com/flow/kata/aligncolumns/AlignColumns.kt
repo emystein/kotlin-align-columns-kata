@@ -11,8 +11,9 @@ class AlignColumns(private val alignment: Alignment) {
 		}
 
 		fun printGrid(input: String, alignment: Alignment): String {
-			val table = InputParser().readTableFrom(input)
-			return AsciiGrid().print(of(table, alignment))
+			val tableAsList = InputParser().readTableFrom(input)
+			val table = this.of(tableAsList, alignment)
+			return AsciiGrid(table).print()
 		}
 	}
 }
