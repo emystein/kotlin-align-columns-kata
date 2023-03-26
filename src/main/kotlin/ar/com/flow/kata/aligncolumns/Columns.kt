@@ -5,20 +5,21 @@ object Columns {
 		return this.of(lines.map { line -> line.asList() })
 	}
 
-	fun of(lines: List<List<String>>): List<Column> {
-		val columnCount = lines.maxOfOrNull { line -> line.size } ?: 0
-		val columnRange = (1..columnCount)
-		return columnRange.map { columnNumber -> Column.create(columnNumber, lines) }
+	fun of(input: List<List<String>>): List<Column> {
+		val columnCount = input.maxOfOrNull { line -> line.size } ?: 0
+		return (1..columnCount).map { columnNumber -> Column.fromInput(input, columnNumber) }
 	}
 }
 
-data class Column(val number: Int, val values: List<String>) {
-	val width: Int = values.maxOf { value -> value.length }
-
+data class Column(val number: Int, val width: Int) {
 	companion object {
-		fun create(number: Int, lines: List<List<String>>): Column {
-			val values = lines.map { cells -> cells.getOrNull(number - 1) ?: "" }
-			return Column(number, values)
+		fun fromInput(input: List<List<String>>, columnNumber: Int): Column {
+			return Column(columnNumber, widthOf(columnNumber, input))
+		}
+
+		private fun widthOf(columnNumber: Int, input: List<List<String>>): Int {
+			val valuesUnderColumn = input.map { cells -> cells.getOrNull(columnNumber - 1) ?: "" }
+			return valuesUnderColumn.maxOf { value -> value.length }
 		}
 	}
 }

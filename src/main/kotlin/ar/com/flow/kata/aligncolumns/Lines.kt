@@ -7,10 +7,14 @@ object Lines {
 	}
 }
 
-data class Line(private val cells: List<Cell>) {
+data class Line(private val cells: List<Cell>, private val columns: List<Column>) {
 	fun alignColumns(alignment: Alignment): Line {
-		val alignedCells = this.cells.map { cell -> alignment.applyTo(cell) }
-		return Line(alignedCells)
+		val alignedCells = this.columns.map { column -> this.cellAt(column.number).alignTo(alignment, column.width)}
+		return Line(alignedCells, columns)
+	}
+
+	private fun cellAt(columnNumber: Int): Cell {
+		return this.cells[columnNumber - 1]
 	}
 
 	fun asList(): List<String> {
@@ -23,7 +27,7 @@ data class Line(private val cells: List<Cell>) {
 				val cellValue = input.getOrNull(column.number - 1) ?: ""
 				Cell(cellValue, column.width)
 			}
-			return Line(cells)
+			return Line(cells, columns)
 		}
 	}
 }
