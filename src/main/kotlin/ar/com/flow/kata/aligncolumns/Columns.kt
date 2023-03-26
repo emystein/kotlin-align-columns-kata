@@ -14,8 +14,11 @@ data class Column(val number: Int, val width: Int) {
 		}
 
 		private fun widthOf(columnNumber: Int, input: List<List<String>>): Int {
-			val valuesUnderColumn = input.map { cells -> cells.getOrNull(columnNumber - 1) ?: "" }
-			return valuesUnderColumn.maxOf { value -> value.length }
+			return valuesOf(columnNumber, input).maxOf { value -> value.length }
+		}
+
+		private fun valuesOf(columnNumber: Int, input: List<List<String>>): List<String> {
+			return input.map { line -> line.getOrNull(columnNumber - 1) ?: "" }
 		}
 	}
 }
