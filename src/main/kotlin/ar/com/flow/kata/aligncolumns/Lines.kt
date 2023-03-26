@@ -2,7 +2,7 @@ package ar.com.flow.kata.aligncolumns
 
 object Lines {
 	fun from(input: List<List<String>>): List<Line> {
-		val columns = Columns.of(input)
+		val columns = Columns.from(input)
 		return input.map { lineInput -> Line.from(lineInput, columns) }
 	}
 }
