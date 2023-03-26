@@ -9,12 +9,15 @@ object Lines {
 
 data class Line(private val values: List<String>, private val columns: List<Column>) {
 	fun alignColumns(alignment: Alignment): Line {
-		val alignedCells = this.columns.map { column -> alignment.applyTo(this.valueAt(column.number), column.width) }
-		return Line(alignedCells, columns)
+		val alignedCells = this.columns.map { column ->
+			val valueToAlign = this.valueAtColumn(column)
+			alignment.applyTo(valueToAlign, column.width)
+		}
+		return Line(alignedCells, this.columns)
 	}
 
-	private fun valueAt(columnNumber: Int): String {
-		return this.values.getOrNull(columnNumber - 1) ?: ""
+	fun valueAtColumn(column: Column): String {
+		return this.values.getOrNull(column.number - 1) ?: ""
 	}
 
 	fun asList(): List<String> {
