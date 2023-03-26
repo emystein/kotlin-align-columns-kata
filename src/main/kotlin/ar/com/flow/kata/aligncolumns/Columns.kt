@@ -3,13 +3,13 @@ package ar.com.flow.kata.aligncolumns
 object Columns {
 	fun from(input: List<List<String>>): List<Column> {
 		val columnCount = input.maxOfOrNull { line -> line.size } ?: 0
-		return (1..columnCount).map { columnNumber -> Column.fromInput(input, columnNumber) }
+		return (1..columnCount).map { columnNumber -> Column.from(input, columnNumber) }
 	}
 }
 
 data class Column(val number: Int, val width: Int) {
 	companion object {
-		fun fromInput(input: List<List<String>>, columnNumber: Int): Column {
+		fun from(input: List<List<String>>, columnNumber: Int): Column {
 			return Column(columnNumber, widthOf(columnNumber, input))
 		}
 
